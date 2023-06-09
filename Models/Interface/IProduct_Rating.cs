@@ -1,6 +1,6 @@
-﻿//namespace Project.Models.Interface
-//{
-//    public interface IProduct_Rating
-//    {
-//    }
-//}
+﻿namespace fireflower_backend.Models.Interface
+{
+    public interface IProduct_Rating
+    {
+    }
+}

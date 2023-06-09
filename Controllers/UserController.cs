@@ -1,7 +1,8 @@
 ﻿using System.Net;
+using fireflower_backend.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Project.Models.Interface;
-using Project.Storage.Entity;
+using fireflower_backend.Storage.Entity;
+using Auth = fireflower_backend.Storage.Entity.Auth;
 
 namespace Project.Controllers
 {
@@ -15,11 +16,11 @@ namespace Project.Controllers
         
         [HttpPost]
         [Route("user/authorization")]
-        public async Task<IActionResult> AddUserFromAuthorization(Authorization authorization)
+        public async Task<IActionResult> AddUserFromAuth(Auth authorization)
         {
             try
             {
-                await _user.AddUserFromAuthorization(authorization);
+                await _user.AddUserFromAuth(authorization);
                 return Ok("Пользователь успешно добавлен.");
             }
             catch (Exception ex)

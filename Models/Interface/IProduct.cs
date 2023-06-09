@@ -1,4 +1,4 @@
-﻿namespace Project.Models.Interface
+﻿namespace fireflower_backend.Models.Interface
 {
     public interface IProduct
     {

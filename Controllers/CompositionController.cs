@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.Models.Interface;
-using Project.Storage.Entity;
+using fireflower_backend.Models.Interface;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Controllers
+namespace fireflower_backend.Controllers
 {
     public class CompositionController : Controller
     {

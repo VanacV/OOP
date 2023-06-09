@@ -1,27 +1,27 @@
 ﻿using System.Net;
 using fireflower_backend.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Project.Models.Interface;
-using Project.Storage.Entity;
+using fireflower_backend.Storage.Entity;
+using Auth = fireflower_backend.Storage.Entity.Auth;
 
 namespace fireflower_backend.Controllers
 {
-    public class AuthorizationController : Controller
+    public class AuthController : Controller
     {
-        private readonly IAuthorization _authorization;
+        private readonly IAuth _authorization;
 
-        public AuthorizationController(IAuthorization authorization)
+        public AuthController(IAuth authorization)
         {
             _authorization = authorization;
         }
 
         [HttpGet]
         [Route("authorization")]
-        public async Task<IActionResult> GetAuthorizations()
+        public async Task<IActionResult> GetAuths()
         {
             try
             {
-                IList<Authorization> authorizations = await _authorization.OutData();
+                IList<Auth> authorizations = await _authorization.OutData();
                 return Ok(authorizations);
             }
             catch (Exception ex)
@@ -31,17 +31,17 @@ namespace fireflower_backend.Controllers
         }
         [HttpPost]
         [Route("authorizations/api/data")]
-        public async Task<IActionResult> AddAuthorization([FromBody] Authorization authorization)
+        public async Task<IActionResult> AddAuth([FromBody] Auth authorization)
         {
-            await _authorization.AddAuthorization(authorization);
+            await _authorization.AddAuth(authorization);
             return Ok();
         }
 
         [HttpGet]
 
-        public async Task<IActionResult> GetUserByAuthorization(string email, string password)
+        public async Task<IActionResult> GetUserByAuth(string email, string password)
         {
-            // var user = await _authorization.GetUserByAuthorization(email, password);
+            // var user = await _authorization.GetUserByAuth(email, password);
             // if (user == null)
             // {
             //     return NotFound();
@@ -51,16 +51,16 @@ namespace fireflower_backend.Controllers
         }
         [HttpPost]
         [Route("authorizations/manual")]
-        public async Task<IActionResult> AddAuthorizationManually()
+        public async Task<IActionResult> AddAuthManually()
         {
-            // var authorization = new Authorization
+            // var authorization = new Auth
             // {
             //     email = "AHAHAH@exampl3e.com",
             //     password = "DASDSA",
             // };
             try
             {
-                // await _authorization.AddAuthorization(authorization);
+                // await _authorization.AddAuth(authorization);
                
 
                 return Ok("Данные успешно добавлены в базу данных.");

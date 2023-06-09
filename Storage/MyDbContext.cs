@@ -8,7 +8,7 @@ namespace fireflower_backend.Storage
     public class MyDbContext:DbContext
     {
 
-        public DbSet<Authorization> Authorization { get; set; }
+        public DbSet<Auth> Auth { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Users_With_Mailing> Users_Withs_Mailing { get; set; }
         public DbSet<Shop> Shop { get; set; }
@@ -26,9 +26,9 @@ namespace fireflower_backend.Storage
         {
 
             modelBuilder
-                .Entity<Authorization>()
+                .Entity<Auth>()
                 .HasOne(u => u.Users)
-                .WithOne(p => p.Authorization)
+                .WithOne(p => p.Auth)
                 .HasForeignKey<Users>(p => p.Auth_id);
 
             modelBuilder

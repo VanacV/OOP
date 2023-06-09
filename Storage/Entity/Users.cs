@@ -9,7 +9,7 @@ namespace fireflower_backend.Storage.Entity
         public string email { get; set; }
         public string address { get; set; }
         public int Auth_id { get; set; }
-        public Authorization Authorization { get; set; }
+        public Auth Auth { get; set; }
         public Payment Payment { get; set; }
         public Users_With_Mailing Malling { get; set; }
     }

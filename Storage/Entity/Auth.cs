@@ -3,7 +3,7 @@ using fireflower_backend.Storage.Entity;
 
 namespace fireflower_backend.Storage.Entity
 {
-    public class Authorization
+    public class Auth
     {
         public int Id { get; set; }
         public string email { get; set; }
