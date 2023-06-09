@@ -1,9 +1,9 @@
-﻿//using Project.Storage.Entity;
+﻿using fireflower_backend.Storage.Entity;
 
-//namespace Project.Models.Interface
-//{
-//    public interface IShop
-//    {
-//        //Task<IList<Shop>> OutputShop();
-//    }
-//}
+namespace fireflower_backend.Models.Interface
+{
+    public interface IShop
+    {
+        Task<IList<Shop>> OutputShop();
+    }
+}

@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using fireflower_backend.Storage.Entity;
+using Microsoft.EntityFrameworkCore;
 
-using Project.Storage.Entity;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Storage
+namespace fireflower_backend.Storage
 {
     public class MyDbContext:DbContext
     {
 
-        public DbSet<Auth> Auth { get; set; }
+        public DbSet<Authorization> Authorization { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Users_With_Mailing> Users_Withs_Mailing { get; set; }
         public DbSet<Shop> Shop { get; set; }
@@ -25,9 +26,9 @@ namespace Project.Storage
         {
 
             modelBuilder
-                .Entity<Auth>()
+                .Entity<Authorization>()
                 .HasOne(u => u.Users)
-                .WithOne(p => p.Auth)
+                .WithOne(p => p.Authorization)
                 .HasForeignKey<Users>(p => p.Auth_id);
 
             modelBuilder

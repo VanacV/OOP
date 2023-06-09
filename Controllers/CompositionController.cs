@@ -6,10 +6,6 @@ namespace Project.Controllers
 {
     public class CompositionController : Controller
     {
-      
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Project.Models.Interface;
 using Project.Storage.Entity;
 
@@ -11,11 +12,7 @@ namespace Project.Controllers
         {
             _user = user;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpPost]
         [Route("user/authorization")]
         public async Task<IActionResult> AddUserFromAuthorization(Authorization authorization)

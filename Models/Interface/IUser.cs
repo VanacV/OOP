@@ -1,6 +1,7 @@
-﻿using Project.Storage.Entity;
+﻿using System.Net;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Models.Interface
+namespace fireflower_backend.Models.Interface
 {
     public interface IUser
     {

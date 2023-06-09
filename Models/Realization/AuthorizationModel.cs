@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Project.Models.Interface;
-using Project.Storage;
-using Project.Storage.Entity;
+﻿using System.Net;
+using fireflower_backend.Models.Interface;
+using fireflower_backend.Storage;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using fireflower_backend.Models.Interface;
+using fireflower_backend.Storage;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Models.Realization
+namespace fireflower_backend.Models.Realization
 {
     public class AuthorizationModel : IAuthorization
     {
@@ -18,19 +22,24 @@ namespace Project.Models.Realization
         {
             _dbContext.Authorization.Add(authorization);
             await _dbContext.SaveChangesAsync();
-            var user = new Users
-            {
-                email = authorization.email,
-                password = authorization.password,
-            };
-            _dbContext.Users.Add(user);
+            // var user = new Users
+            // {
+            //     email = authorization.email,
+            //     password = authorization.password,
+            // };
+            // _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
         }
-       
-        public async Task<Users> GetUserByAuthorization(string email, string password)
+
+        public Task CheckMethod()
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.email == email && u.password == password);
+            throw new NotImplementedException();
         }
+
+        // public async Task<Users> GetUserByAuthorization(string email, string password)
+        // {
+        //     // return await _dbContext.Users.FirstOrDefaultAsync(u => u.email == email && u.password == password);
+        // }
 
         public async Task<IList<Authorization>> OutData()
         {
