@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Project.Models.Interface;
-using Project.Storage;
-using Project.Storage.Entity;
+﻿using fireflower_backend.Storage;
+using Microsoft.EntityFrameworkCore;
+using fireflower_backend.Models.Interface;
+using fireflower_backend.Storage;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Models.Realization
+namespace fireflower_backend.Models.Realization
 {
     public class ShopModel : IShop
     {

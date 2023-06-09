@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Project.Storage.Entity
+namespace fireflower_backend.Storage.Entity
 {
     public class Payment
     {

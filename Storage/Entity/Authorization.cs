@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Primitives;
+using fireflower_backend.Storage.Entity;
 
-namespace Project.Storage.Entity
+namespace fireflower_backend.Storage.Entity
 {
-    public class Auth
+    public class Authorization
     {
         public int Id { get; set; }
         public string email { get; set; }

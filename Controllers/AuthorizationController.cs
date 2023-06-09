@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using fireflower_backend.Models.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Project.Models.Interface;
 using Project.Storage.Entity;
 
-namespace Project.Controllers
+namespace fireflower_backend.Controllers
 {
     public class AuthorizationController : Controller
     {
@@ -14,7 +16,7 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        [Route("authorizations")]
+        [Route("authorization")]
         public async Task<IActionResult> GetAuthorizations()
         {
             try
@@ -39,26 +41,26 @@ namespace Project.Controllers
 
         public async Task<IActionResult> GetUserByAuthorization(string email, string password)
         {
-            var user = await _authorization.GetUserByAuthorization(email, password);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            // var user = await _authorization.GetUserByAuthorization(email, password);
+            // if (user == null)
+            // {
+            //     return NotFound();
+            // }
 
-            return Ok(user);
+            return Ok();
         }
         [HttpPost]
         [Route("authorizations/manual")]
         public async Task<IActionResult> AddAuthorizationManually()
         {
-            var authorization = new Authorization
-            {
-                email = "AHAHAH@exampl3e.com",
-                password = "DASDSA",
-            };
+            // var authorization = new Authorization
+            // {
+            //     email = "AHAHAH@exampl3e.com",
+            //     password = "DASDSA",
+            // };
             try
             {
-                await _authorization.AddAuthorization(authorization);
+                // await _authorization.AddAuthorization(authorization);
                
 
                 return Ok("Данные успешно добавлены в базу данных.");
@@ -69,5 +71,22 @@ namespace Project.Controllers
 
             }
         }
+
+        [HttpGet]
+        [Route("checkin")]
+
+        public async Task<IActionResult> CheckMethod()
+        {
+            await _authorization.CheckMethod();
+            try
+            {
+                return Ok("ok");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "ЕРОР БЛЯТЬ");
+            }
+        }
+        
     }
 }
