@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using fireflower_backend.Models;
+using Microsoft.AspNetCore.Mvc;
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage.Entity;
 
@@ -14,15 +15,20 @@ namespace fireflower_backend.Controllers
             _shopModel = shopModel;
         }
 
-        [HttpGet]
-        [Route("shop")]
-        public async Task<IActionResult> OutputShop()
+        [HttpGet("GetAllShop")]
+        public async Task<ActionResult<List<Shop>>> GetAllShop()
         {
-            IList<Shop> shops = await _shopModel.OutputShop();
-            return Ok("shops");
+            try
+            {
+                List<Shop> shops = await _shopModel.GetAllShop();
+                return shops;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed" + ex.Message);
+            }
         }
     }
 
-
 }
-
+ 
