@@ -1,10 +1,8 @@
-﻿using System.Net;
-using fireflower_backend.Models.Interface;
+﻿using fireflower_backend.Models.Interface;
 using Microsoft.AspNetCore.Mvc;
-using fireflower_backend.Storage.Entity;
 using Auth = fireflower_backend.Storage.Entity.Auth;
 
-namespace Project.Controllers
+namespace fireflower_backend.Controllers
 {
     public class UserController : Controller
     {

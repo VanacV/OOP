@@ -1,20 +1,25 @@
-﻿using fireflower_backend.Storage;
-using Microsoft.EntityFrameworkCore;
+﻿
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using fireflower_backend.Storage.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace fireflower_backend.Models.Realization
 {
     public class ShopModel : IShop
     {
-        private MyDbContext _dbContext;
-        public ShopModel(MyDbContext dbConxetx)
-        {
-            _dbContext = dbConxetx;
-        }
+        private readonly MyDbContext _dbContext;
 
-        public async Task<IList<Shop>> OutputShop() => await _dbContext.Shop.ToListAsync();
-        
+        public ShopModel(MyDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        public async Task<List<Shop>> GetAllShop()
+        {
+            List<Shop> shops = await _dbContext.Shop.Include(s => s.Products)
+                .Include(s => s.Shop_Rating).ToListAsync();
+            return shops;
+        }
     }
 }

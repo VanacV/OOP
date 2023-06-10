@@ -1,6 +1,6 @@
-﻿//namespace Project.Models.Realization
-//{
-//    public class MallingModel
-//    {
-//    }
-//}
+﻿namespace fireflower_backend.Models.Realization
+{
+   public class MallingModel
+   {
+   }
+}

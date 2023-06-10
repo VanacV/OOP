@@ -13,7 +13,7 @@ namespace fireflower_backend.Models.Realization
         }
         public async Task AddUser(Users users)
         {
-           _dbcontext.Users.Add(users);
+            _dbcontext.Users.Add(users);
             await _dbcontext.SaveChangesAsync();  
         }
 
