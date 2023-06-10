@@ -19,14 +19,15 @@ namespace fireflower_backend.Models.Realization
 
         public async Task AddUserFromAuth(Auth authorization)
         {
+            int maxId = _dbcontext.Auth.Max(p => p.Id);
+            //auth.Id = maxId + 1;
             var user = new Users
             {
+                id = maxId+1,
                 email = authorization.email,
-               // password = authorization.password
-                // Дополнительные поля для заполнения
+                password= authorization.password,
+                Auth = authorization
             };
-
-            // Добавление пользователя в базу данных
             _dbcontext.Users.Add(user);
             await _dbcontext.SaveChangesAsync();
         }

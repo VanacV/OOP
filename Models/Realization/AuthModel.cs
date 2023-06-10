@@ -5,59 +5,37 @@ using fireflower_backend.Storage.Entity;
 
 namespace fireflower_backend.Models.Realization
 {
+    
     public class AuthModel: IAuth
     {
         private readonly MyDbContext _dbContext;
-        private IAuth _authorizationImplementation;
-
-        public AuthModel(MyDbContext dbContext, MyDbContext userContext)
+        public AuthModel(MyDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
-        public async Task AddAuth(Auth authorization)
+        public async Task<Auth> AddAuth(Auth auth)
         {
-            _dbContext.Auth.Add(authorization);
+           
+            int maxUserId= _dbContext.Users.Max(p => p.id);
+            var user = new Users
+            {
+                id = maxUserId+1,
+                password = auth.password,
+                email = auth.email,
+                Auth_id = auth.Id+1
+            };
+            auth.Users = user;
+            int maxId = _dbContext.Auth.Max(p => p.Id);
+            auth.Id = maxId + 1;
+            _dbContext.Auth.Add(auth);
             await _dbContext.SaveChangesAsync();
-            // var user = new Users
-            // {
-            //     email = authorization.email,
-            //     password = authorization.password,
-            // };
-            // _dbContext.Users.Add(user);
-            await _dbContext.SaveChangesAsync();
+            return auth;
         }
 
-        public Task<Users> GetUserByAuth(string email, string password)
+        public async Task<List<Auth>> GetAllAuth()
         {
-            throw new NotImplementedException();
+            List<Auth> auth = await _dbContext.Auth.ToListAsync();
+            return auth;
         }
-
-        Task<IList<Auth>> IAuth.OutData()
-        {
-            return OutData();
-        }
-
-        Task IAuth.AddAuth(Auth authorization)
-        {
-            return AddAuth(authorization);
-        }
-
-        public Task CheckMethod()
-        {
-            throw new NotImplementedException();
-        }
-
-        // public async Task<Users> GetUserByAuth(string email, string password)
-        // {
-        //     // return await _dbContext.Users.FirstOrDefaultAsync(u => u.email == email && u.password == password);
-        // }
-
-        public async Task<IList<Auth>> OutData()
-        {
-            return await _dbContext.Auth.ToListAsync();
-        }
-       
-
     }
 }

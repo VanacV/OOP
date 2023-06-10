@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using fireflower_backend.Models.Interface;
+using fireflower_backend.Storage;
 using Microsoft.AspNetCore.Mvc;
 using fireflower_backend.Storage.Entity;
 using Auth = fireflower_backend.Storage.Entity.Auth;
@@ -8,85 +9,48 @@ namespace fireflower_backend.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly IAuth _authorization;
+        private readonly MyDbContext _dbContext;
+        private readonly IAuth _auth;
 
-        public AuthController(IAuth authorization)
+        public AuthController(MyDbContext dbContext)
         {
-            _authorization = authorization;
-        }
-
-        [HttpGet]
-        [Route("authorization")]
-        public async Task<IActionResult> GetAuths()
-        {
-            try
-            {
-                IList<Auth> authorizations = await _authorization.OutData();
-                return Ok(authorizations);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
-            }
+            _dbContext = dbContext;
         }
         [HttpPost]
         [Route("authorizations/api/data")]
         public async Task<IActionResult> AddAuth([FromBody] Auth authorization)
         {
-            await _authorization.AddAuth(authorization);
-            return Ok();
-        }
 
-        [HttpGet]
-
-        public async Task<IActionResult> GetUserByAuth(string email, string password)
-        {
-            // var user = await _authorization.GetUserByAuth(email, password);
-            // if (user == null)
-            // {
-            //     return NotFound();
-            // }
-
-            return Ok();
-        }
-        [HttpPost]
-        [Route("authorizations/manual")]
-        public async Task<IActionResult> AddAuthManually()
-        {
-            // var authorization = new Auth
-            // {
-            //     email = "AHAHAH@exampl3e.com",
-            //     password = "DASDSA",
-            // };
             try
             {
-                // await _authorization.AddAuth(authorization);
-               
+                if (string.IsNullOrWhiteSpace(authorization.email) || string.IsNullOrWhiteSpace(authorization.password))
+                {
+                    return BadRequest("Login and password are required.");
+                }
 
-                return Ok("Данные успешно добавлены в базу данных.");
+                _dbContext.Auth.Add(authorization);
+                await _dbContext.SaveChangesAsync();
+
+                return Ok(authorization);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Произошла ошибка при добавлении данных в базу данных: {ex.Message}");
-
+                return StatusCode(500, $"An error occurred while adding the authorization: {ex.Message}");
             }
         }
-
         [HttpGet]
-        [Route("checkin")]
-
-        public async Task<IActionResult> CheckMethod()
+        [Route("auth/api/out")]
+        public async Task<ActionResult<List<Auth>>> GetAllAuth()
         {
-            await _authorization.CheckMethod();
             try
             {
-                return Ok("ok");
+                List<Auth> auths = await _auth.GetAllAuth();
+                return auths;
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "ЕРОР БЛЯТЬ");
+                throw new Exception("Failed" + ex.Message);
             }
         }
-        
     }
 }
