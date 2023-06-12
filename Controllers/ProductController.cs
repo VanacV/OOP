@@ -15,18 +15,10 @@ namespace fireflower_backend.Controllers
             _product = product;
            
         }
-        [HttpGet("GetAllProduct")]
+        [HttpGet("api/GetAllProduct")]
         public async Task<ActionResult<List<Product>>> GetAllProduct()
         {
-            try
-            {
-                List<Product> products = await _product.GetAllProduct();
-                return products;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed" + ex.Message);
-            }
+            return Ok(await _product.GetAllProduct());
         }
     }
 }

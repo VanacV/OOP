@@ -6,11 +6,9 @@ namespace fireflower_backend.Storage.Entity
 {
     public class Auth
     {
-        [JsonIgnore] 
         public int Id { get; set; } 
         public string email { get; set; }
         public string password { get; set; }
-        [JsonIgnore]
         public Users Users { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace fireflower_backend.Controllers
         }
         [HttpPost]
         [Route("authorizations/api/data")]
-        public async Task<IActionResult> AddAuth([FromBody] Auth authorization)
+        public async Task<IActionResult> AddAuth( Auth authorization)
         {
 
             try

@@ -13,11 +13,11 @@ namespace fireflower_backend.Controllers
             _productRating = productRating;
         }
         [HttpGet("GetAllProductRaiting")]
-        public async Task<ActionResult<List<Product_Rating>>> GetAllProduct_Raiting()
+        public async Task<ActionResult<List<Product_Rating>>> GetAllProductRaiting()
         {
             try
             {
-                List<Product_Rating> productRatings = await _productRating.GetAllProduct_Raiting();
+                List<Product_Rating> productRatings = await _productRating.GetAllProductRaiting();
                 return productRatings;
             }
             catch (Exception ex)

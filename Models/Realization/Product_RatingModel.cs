@@ -13,7 +13,7 @@ namespace fireflower_backend.Models.Realization
         {
             _dbContext = dbContext;
         }
-        public async Task<List<Product_Rating>> GetAllProduct_Raiting()
+        public async Task<List<Product_Rating>> GetAllProductRaiting()
         {
             List<Product_Rating> productRatings = await _dbContext.Product_Ratings.ToListAsync();
             return productRatings;

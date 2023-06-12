@@ -1,24 +1,61 @@
-﻿using fireflower_backend.Models.Interface;
+﻿global using Project.Models;
+using System.Runtime.CompilerServices;
+using AutoMapper;
+using fireflower_backend.Controllers;
+using fireflower_backend.Dtos;
+using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using fireflower_backend.Storage.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace fireflower_backend.Models.Realization
 {
+    
     public class PaymentModel:IPayment
     {
         private MyDbContext _dbContext;
-
-        public PaymentModel(MyDbContext myDbContext)
+        private readonly IMapper _mapper;
+        
+        public PaymentModel(MyDbContext myDbContext,IMapper mapper)
         {
             _dbContext = myDbContext;
+            _mapper = mapper;
         }
-        public async Task<Payment> AddPayment(Payment payment)
+
+        public PaymentModel(IMapper mapper )
         {
-            int maxId = _dbContext.Payment.Max(p => p.Id);
-            payment.Id = maxId + 1;
-            _dbContext.Payment.Add(payment);
-            await _dbContext.SaveChangesAsync();
-            return payment;
+            _mapper = mapper;   
         }
+        public async Task<serviceResponce<paymentDtos>> AddPayment(paymentDtos newPayment)
+        {
+            var serviceResponse = new serviceResponce<paymentDtos>();
+            try
+            {
+                var payment = _mapper.Map<Payment>(newPayment);
+
+                _dbContext.Payment.Add(payment);
+                await _dbContext.SaveChangesAsync();
+
+                serviceResponse.DataPayment = new List<paymentDtos> { _mapper.Map<paymentDtos>(payment) };
+                serviceResponse.Success = true;
+                serviceResponse.Messege = "Payment added successfully.";
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Messege = ex.Message;
+
+                // Вывести информацию обо всех внутренних исключениях
+                Exception innerException = ex.InnerException;
+                while (innerException != null)
+                {
+                    Console.WriteLine(innerException.Message);
+                    innerException = innerException.InnerException;
+                }
+            }
+            return serviceResponse;
+        }
+
     }
 }

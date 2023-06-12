@@ -3,6 +3,7 @@ using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using fireflower_backend.Storage.Entity;
 using Microsoft.EntityFrameworkCore;
+using Project.Models;
 
 
 namespace fireflower_backend.Models.Realization
@@ -15,11 +16,13 @@ namespace fireflower_backend.Models.Realization
         {
             _dbContext = dbContext;
         }
-        public async Task<List<Shop>> GetAllShop()
+        public async Task<serviceResponce<List<Shop>>> GetAllShop()
         {
+            var serviceResponce = new serviceResponce<List<Shop>>();
             List<Shop> shops = await _dbContext.Shop.Include(s => s.Products)
                 .Include(s => s.Shop_Rating).ToListAsync();
-            return shops;
+           // serviceResponce.Data = shops;
+            return serviceResponce;
         }
     }
 }

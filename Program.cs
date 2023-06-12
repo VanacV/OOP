@@ -1,6 +1,10 @@
+using fireflower_backend.Dtos;
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Models.Realization;
 using fireflower_backend.Storage;
+using fireflower_backend.Storage.Entity;
+using AutoMapper;
+using fireflower_backend;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +14,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddAutoMapper(typeof(AutoMapperController).Assembly);
+
+
 builder.Services.AddScoped<IShop, ShopModel>();
 builder.Services.AddScoped<IProduct, ProductModel>();
+builder.Services.AddScoped<IPayment,PaymentModel>();
 builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddCors(options =>
 {

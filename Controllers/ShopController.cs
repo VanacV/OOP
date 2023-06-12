@@ -1,7 +1,9 @@
-﻿using fireflower_backend.Models;
+﻿using fireflower_backend.Dtos;
+using fireflower_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage.Entity;
+using Project.Models;
 
 namespace fireflower_backend.Controllers
 {
@@ -16,17 +18,9 @@ namespace fireflower_backend.Controllers
         }
 
         [HttpGet("GetAllShop")]
-        public async Task<ActionResult<List<Shop>>> GetAllShop()
+        public async Task<ActionResult<serviceResponce<List<productDtos>>>>GetAllShop()
         {
-            try
-            {
-                List<Shop> shops = await _shopModel.GetAllShop();
-                return shops;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed" + ex.Message);
-            }
+            return Ok(await _shopModel.GetAllShop());
         }
     }
 
