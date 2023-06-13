@@ -16,13 +16,10 @@ namespace fireflower_backend.Models.Realization
         {
             _dbContext = dbContext;
         }
-        public async Task<serviceResponce<List<Shop>>> GetAllShop()
+        public async Task<List<Shop>> GetAllShop()
         {
-            var serviceResponce = new serviceResponce<List<Shop>>();
-            List<Shop> shops = await _dbContext.Shop.Include(s => s.Products)
-                .Include(s => s.Shop_Rating).ToListAsync();
-           // serviceResponce.Data = shops;
-            return serviceResponce;
+            var shops = await _dbContext.Shop.ToListAsync();
+            return shops;
         }
     }
 }

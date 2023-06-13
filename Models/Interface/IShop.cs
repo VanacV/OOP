@@ -6,6 +6,6 @@ namespace fireflower_backend.Models.Interface
 {
     public interface IShop
     {
-       Task<serviceResponce<List<Shop>>> GetAllShop();
+       Task<List<Shop>> GetAllShop();
     }
 }

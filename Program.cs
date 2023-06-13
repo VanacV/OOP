@@ -18,9 +18,11 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(AutoMapperController).Assembly);
 
 
+
 builder.Services.AddScoped<IShop, ShopModel>();
 builder.Services.AddScoped<IProduct, ProductModel>();
 builder.Services.AddScoped<IPayment,PaymentModel>();
+builder.Services.AddScoped<IShop_Rating, Shop_RatingMode>();
 builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddCors(options =>
 {

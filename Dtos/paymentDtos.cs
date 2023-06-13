@@ -17,6 +17,5 @@ public class paymentDtos
 
 
     [ForeignKey("Product")] public int Product_id { get; set; }
-
-
+    
 }

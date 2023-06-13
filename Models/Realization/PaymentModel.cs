@@ -37,16 +37,14 @@ namespace fireflower_backend.Models.Realization
                 _dbContext.Payment.Add(payment);
                 await _dbContext.SaveChangesAsync();
 
-                serviceResponse.DataPayment = new List<paymentDtos> { _mapper.Map<paymentDtos>(payment) };
+                serviceResponse.Data = new List<paymentDtos> { _mapper.Map<paymentDtos>(payment) };
                 serviceResponse.Success = true;
-                serviceResponse.Messege = "Payment added successfully.";
+                serviceResponse.Message = "Payment added successfully.";
             }
             catch (Exception ex)
             {
                 serviceResponse.Success = false;
-                serviceResponse.Messege = ex.Message;
-
-                // Вывести информацию обо всех внутренних исключениях
+                serviceResponse.Message = ex.Message;
                 Exception innerException = ex.InnerException;
                 while (innerException != null)
                 {
