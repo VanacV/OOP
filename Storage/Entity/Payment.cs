@@ -8,8 +8,7 @@ public class Payment
     [Key] public int Id { get; set; }
     public string address { get; set; }
     public int Sum_cost { get; set; }
-    public int payment_info { get; set; }
-    public int deliveryTime { get; set; }
+    public string payment_info { get; set; }
 
     [ForeignKey("User")] public int UserId { get; set; }
 

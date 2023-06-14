@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public double Rate { get; set; }
-        public string Comment { get; set; }
+        public List<Comment_Product> Comment_Product { get; set; }
         public int product_id { get; set; }
         public Product Product { get; set; }
     }

@@ -8,6 +8,7 @@ namespace fireflower_backend.Storage.Entity
     {
         public int Id { get; set; } 
         public string email { get; set; }
+        public int phone { get; set; }
         public string password { get; set; }
         public Users Users { get; set; }
     }

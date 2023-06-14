@@ -37,11 +37,11 @@ namespace fireflower_backend.Storage
                 .WithOne(p => p.Users)
                 .HasForeignKey<Payment>(p => p.UserId);
 
-            modelBuilder
-                .Entity<Product>()
-                .HasOne(u => u.Payment)
-                .WithOne(p => p.Product)
-                .HasForeignKey<Payment>(p => p.Product_id);
+            // modelBuilder
+            //     .Entity<Product>()
+            //     .HasOne(u => u.Payment)
+            //     .WithOne(p => p.Product)
+            //     .HasForeignKey<Payment>(p => p.Product_id);
 
             modelBuilder
                 .Entity<Product>()
@@ -60,6 +60,8 @@ namespace fireflower_backend.Storage
                 .HasOne(u => u.Malling)
                 .WithOne(p => p.Users)
                 .HasForeignKey<Users_With_Mailing>(p => p.User_Id);
+            
+            
         }
     }
 
