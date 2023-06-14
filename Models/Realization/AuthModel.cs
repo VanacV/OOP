@@ -60,10 +60,8 @@ namespace fireflower_backend.Models.Realization
 
             try
             {
-                // Получите пользователя по email из базы данных
                 var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.email == authDtos.email);
-
-                // Если пользователь найден и пароль совпадает, выполните вход
+                
                 if (user != null && BCrypt.Net.BCrypt.Verify(authDtos.password, user.password))
                 {
                     serviceResponce.Success = true;

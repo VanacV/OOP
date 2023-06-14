@@ -18,5 +18,6 @@ public class AutoMapperController : Profile
         CreateMap<productRatingDtos, Product_Rating>();
         CreateMap<Auth, authDtos>();
         CreateMap<authDtos, Auth>();
+        CreateMap<Users, userDtos>();
     }
 }

@@ -30,7 +30,7 @@ public class Product_RatingModel:IProduct_Rating
 
             serviceResponce.Data = new List<productRatingDtos> { _mapper.Map<productRatingDtos>(rating) };
             serviceResponce.Success = true;
-            serviceResponce.Message = " added successfully.";
+            serviceResponce.Message = "product rating added successfully.";
         }
         catch (Exception ex)
         {

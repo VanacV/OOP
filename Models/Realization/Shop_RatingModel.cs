@@ -57,7 +57,7 @@ public class Shop_RatingMode:IShop_Rating
 
             serviceResponse.Data = new List<RatingShopDtos> { _mapper.Map<RatingShopDtos>(rating) };
             serviceResponse.Success = true;
-            serviceResponse.Message = "Payment added successfully.";
+            serviceResponse.Message = "shopRating added successfully.";
         }
         catch (Exception ex)
         {

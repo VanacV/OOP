@@ -1,35 +1,38 @@
-﻿using fireflower_backend.Models.Interface;
+﻿using AutoMapper;
+using fireflower_backend.Dtos;
+using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using fireflower_backend.Storage.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace fireflower_backend.Models.Realization
 {
     public class UserModel : IUser
     {
-        private readonly MyDbContext _dbcontext;
-        public UserModel(MyDbContext dbcontext)
+        private readonly MyDbContext _dbContext;
+        private readonly IMapper _mapper;
+        public UserModel(MyDbContext dbContext,IMapper mapper)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbContext;
+            _mapper = mapper;
         }
-        public async Task AddUser(Users users)
-        {
-            _dbcontext.Users.Add(users);
-            await _dbcontext.SaveChangesAsync();  
-        }
-
-        public async Task AddUserFromAuth(Auth authorization)
-        {
-            int maxId = _dbcontext.Auth.Max(p => p.Id);
-            //auth.Id = maxId + 1;
-            var user = new Users
+            public async Task<serviceResponce<userDtos>> getData()
             {
-                id = maxId+1,
-                email = authorization.email,
-                password= authorization.password,
-                Auth = authorization
-            };
-            _dbcontext.Users.Add(user);
-            await _dbcontext.SaveChangesAsync();
-        }
+                var service = new serviceResponce<userDtos>();
+                try
+                {
+                    var dbUserData = await _dbContext.Users.ToListAsync();
+                    service.Data = dbUserData.Select(c => _mapper.Map<userDtos>(c)).ToList();
+                    service.Success = true;
+                    service.Message = "Данные успешно получены.";
+                }
+                catch (Exception ex)
+                {
+                    service.Success = false;
+                    service.Message = "Ошибка при получении данных: " + ex.Message;
+                }
+        
+                return service;
+            }
     }
 }

@@ -14,13 +14,13 @@ namespace fireflower_backend.Controllers
         {
             _productRating = productRating;
         }
-        [HttpGet("api/GetAllProductRaiting")]
+        [HttpGet("api/GetAllProductRating")]
         public async Task<ActionResult<List<productRatingDtos>>> GetAllProductRaiting()
         {
             return Ok(await _productRating.GetAllProductRating());
         }
 
-        [HttpPost("api/AddProductRaiting")]
+        [HttpPost("api/AddProductRating")]
         public async Task<ActionResult<serviceResponce<productRatingDtos>>> AddPruductRating(productRatingDtos productRatingDtos)
         {
             return Ok(await _productRating.AddPruductRating(productRatingDtos));
