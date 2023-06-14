@@ -17,7 +17,7 @@ namespace fireflower_backend.Controllers
             _shopModel = shopModel;
         }
 
-        [HttpGet("GetAllShop")]
+        [HttpGet("api/GetAllShop")]
         public async Task<ActionResult<serviceResponce<List<productDtos>>>>GetAllShop()
         {
             return Ok(await _shopModel.GetAllShop());

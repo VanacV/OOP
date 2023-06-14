@@ -24,6 +24,7 @@ builder.Services.AddScoped<IProduct, ProductModel>();
 builder.Services.AddScoped<IPayment,PaymentModel>();
 builder.Services.AddScoped<IShop_Rating, Shop_RatingMode>();
 builder.Services.AddScoped<IProduct_Rating, Product_RatingModel>();
+builder.Services.AddScoped<IAuth, AuthModel>();
 builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddCors(options =>
 {

@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using fireflower_backend.Dtos;
+using fireflower_backend.Models;
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using Microsoft.AspNetCore.Mvc;
@@ -12,45 +14,23 @@ namespace fireflower_backend.Controllers
         private readonly MyDbContext _dbContext;
         private readonly IAuth _auth;
 
-        public AuthController(MyDbContext dbContext)
+        public AuthController(IAuth auth)
         {
-            _dbContext = dbContext;
+            _auth = auth;
         }
         [HttpPost]
-        [Route("authorizations/api/data")]
-        public async Task<IActionResult> AddAuth( Auth authorization)
+        [Route("api/register")]
+        public async Task<ActionResult<serviceResponce<authDtos>>> Register(authDtos authDtos)
         {
-
-            try
-            {
-                if (string.IsNullOrWhiteSpace(authorization.email) || string.IsNullOrWhiteSpace(authorization.password))
-                {
-                    return BadRequest("Login and password are required.");
-                }
-
-                _dbContext.Auth.Add(authorization);
-                await _dbContext.SaveChangesAsync();
-
-                return Ok(authorization);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred while adding the authorization: {ex.Message}");
-            }
+            return Ok(await _auth.Register(authDtos));
         }
-        [HttpGet]
-        [Route("auth/api/out")]
-        public async Task<ActionResult<List<Auth>>> GetAllAuth()
+
+        [HttpPost]
+        [Route("api/Login")]
+        public async Task<ActionResult<serviceResponce<authDtos>>> Login(authDtos authDtos)
         {
-            try
-            {
-                List<Auth> auths = await _auth.GetAllAuth();
-                return auths;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed" + ex.Message);
-            }
+            return Ok(await _auth.Login(authDtos));
         }
+
     }
 }

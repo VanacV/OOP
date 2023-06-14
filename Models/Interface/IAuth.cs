@@ -5,7 +5,8 @@ namespace fireflower_backend.Models.Interface
 {
     public interface IAuth
     {
-        Task<authDtos> AddAuth(authDtos authorization);
-        Task<List<Auth>> GetAllAuth();
+        Task<serviceResponce<authDtos>> Register(authDtos authDtos);
+        Task<serviceResponce<authDtos>> Login(authDtos authDtos);
     }   
 }
+    

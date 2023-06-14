@@ -14,7 +14,7 @@ namespace fireflower_backend.Controllers
         {
             _productRating = productRating;
         }
-        [HttpGet("GetAllProductRaiting")]
+        [HttpGet("api/GetAllProductRaiting")]
         public async Task<ActionResult<List<productRatingDtos>>> GetAllProductRaiting()
         {
             return Ok(await _productRating.GetAllProductRating());
