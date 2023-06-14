@@ -28,10 +28,9 @@ namespace fireflower_backend.Controllers
 
         [HttpPost]
         [Route("api/Login")]
-        public async Task<ActionResult<serviceResponce<authDtos>>> Login(authDtos authDtos)
+        public async Task<ActionResult<serviceResponce<authDtos>>> Login([FromBody] authDtos authDtos)
         {
             return Ok(await _auth.Login(authDtos));
         }
-
     }
 }

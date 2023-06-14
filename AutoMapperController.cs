@@ -19,5 +19,7 @@ public class AutoMapperController : Profile
         CreateMap<Auth, authDtos>();
         CreateMap<authDtos, Auth>();
         CreateMap<Users, userDtos>();
+        CreateMap<Users_With_Mailing, userMailingDtos>();
+        CreateMap<userMailingDtos, Users_With_Mailing>();
     }
 }

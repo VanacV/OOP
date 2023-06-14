@@ -19,7 +19,7 @@ namespace fireflower_backend.Controllers
         }
 
         [HttpPost("api/addPayment")]
-        public async Task<ActionResult<serviceResponce<paymentDtos>>> AddPayment(paymentDtos newPayment)
+        public async Task<ActionResult<serviceResponce<paymentDtos>>> AddPayment([FromBody] paymentDtos newPayment)
         {
             return Ok(await _payment.AddPayment(newPayment));
         }

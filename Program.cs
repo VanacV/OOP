@@ -5,6 +5,7 @@ using fireflower_backend.Storage;
 using fireflower_backend.Storage.Entity;
 using AutoMapper;
 using fireflower_backend;
+using fireflower_backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(AutoMapperController).Assembly);
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "check";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 builder.Services.AddScoped<IShop, ShopModel>();
@@ -25,6 +33,7 @@ builder.Services.AddScoped<IPayment,PaymentModel>();
 builder.Services.AddScoped<IShop_Rating, Shop_RatingMode>();
 builder.Services.AddScoped<IProduct_Rating, Product_RatingModel>();
 builder.Services.AddScoped<IAuth, AuthModel>();
+builder.Services.AddScoped<IMalling, MallingModel>();
 builder.Services.AddDbContext<MyDbContext>();
 builder.Services.AddCors(options =>
 {
@@ -47,7 +56,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors(myAllowSpecificOrigins);
 app.UseHttpsRedirection();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllers();

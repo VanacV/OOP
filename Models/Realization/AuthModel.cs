@@ -1,10 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using fireflower_backend.Dtos;
 using fireflower_backend.Models.Interface;
 using fireflower_backend.Storage;
 using Microsoft.EntityFrameworkCore;
 using fireflower_backend.Storage.Entity;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Http;
+
 
 namespace fireflower_backend.Models.Realization
 {
@@ -13,8 +16,9 @@ namespace fireflower_backend.Models.Realization
     {
         private readonly MyDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _accessor;
 
-        public AuthModel(MyDbContext dbContext,IMapper mapper)
+        public AuthModel(MyDbContext dbContext, IMapper mapper)
         {
             _mapper = mapper;
             _dbContext = dbContext;
@@ -65,7 +69,7 @@ namespace fireflower_backend.Models.Realization
                 if (user != null && BCrypt.Net.BCrypt.Verify(authDtos.password, user.password))
                 {
                     serviceResponce.Success = true;
-                    serviceResponce.Message = "Вход выполнен успешно.";
+                    serviceResponce.Message = "Вход выполнен успешн";
                 }
                 else
                 {

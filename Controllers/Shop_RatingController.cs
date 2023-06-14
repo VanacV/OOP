@@ -20,7 +20,7 @@ public class Shop_RatingController : Controller
     }
 
     [HttpPost("api/AddRatingShop")]
-    public async Task<ActionResult<RatingShopDtos>> AddShopRating(RatingShopDtos ratingShopDtos)
+    public async Task<ActionResult<RatingShopDtos>> AddShopRating([FromBody] RatingShopDtos ratingShopDtos)
     {
         return Ok(await _shopRating.AddShopRating(ratingShopDtos));
     }

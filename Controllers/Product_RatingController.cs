@@ -21,7 +21,7 @@ namespace fireflower_backend.Controllers
         }
 
         [HttpPost("api/AddProductRating")]
-        public async Task<ActionResult<serviceResponce<productRatingDtos>>> AddPruductRating(productRatingDtos productRatingDtos)
+        public async Task<ActionResult<serviceResponce<productRatingDtos>>> AddPruductRating([FromBody] productRatingDtos productRatingDtos)
         {
             return Ok(await _productRating.AddPruductRating(productRatingDtos));
         }
