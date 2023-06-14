@@ -21,7 +21,7 @@ namespace fireflower_backend.Controllers
         }
         [HttpPost]
         [Route("api/register")]
-        public async Task<ActionResult<serviceResponce<authDtos>>> Register(authDtos authDtos)
+        public async Task<ActionResult<serviceResponce<authDtos>>> Register([FromBody] authDtos authDtos)
         {
             return Ok(await _auth.Register(authDtos));
         }
